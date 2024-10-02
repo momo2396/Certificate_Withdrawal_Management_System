@@ -21,14 +21,15 @@ import { TiTick } from "react-icons/ti";
 export function HistoryTable({ history, pageLimit, currentPage }) {
   const roleMapping = {
     student: "Student",
+    pending: "Pending",
     provost: "Provost",
     certificate_verifier1: "First Verifier",
     certificate_verifier2: "Second Verifier",
     certificate_section_incharge: "Certificate Section In-charge",
     exam_controller: "Exam Controller",
-    vice_chancellor: "Vice Chancellor"
+    vice_chancellor: "Vice Chancellor",
   };
-  
+  console.log(history);
   // let roles = roleMapping[user?.role] || "General";
   return (
     <>
@@ -39,9 +40,7 @@ export function HistoryTable({ history, pageLimit, currentPage }) {
           </Button>
         </Link>
       </div>
-      <h1 className="text-2xl font-bold py-4">
-      My Applications
-      </h1>
+      <h1 className="text-2xl font-bold py-4">My Applications</h1>
       <Table className="border">
         <TableHeader>
           <TableRow>
@@ -65,21 +64,21 @@ export function HistoryTable({ history, pageLimit, currentPage }) {
                 {item?.status === "Rejected" ? (
                   <div className="flex items-center w-full justify-between">
                     <p className="flex-1 text-center">
-                      {roleMapping[item?.verificationUpdate]||"Pending"}
+                      {roleMapping[item?.verificationUpdate]}
                     </p>{" "}
                     <ImCross size={15} color="red" />
                   </div>
                 ) : item?.status === "Accepted" ? (
                   <div className="flex items-center w-full justify-between">
                     <p className="flex-1 text-center">
-                    {roleMapping[item?.verificationUpdate]}
+                      {roleMapping[item?.verificationUpdate]}
                     </p>
                     <TiTick size={25} color="green" />
                   </div>
                 ) : (
                   <div className="flex items-center w-full justify-between">
                     <p className="flex-1 text-center">
-                    {roleMapping[item?.verificationUpdate]}
+                      {roleMapping[item?.verificationUpdate]}
                     </p>{" "}
                     <FaQuestion size={15} color="cyan" />
                   </div>
