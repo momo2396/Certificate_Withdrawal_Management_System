@@ -51,7 +51,7 @@ const Formfillup = () => {
   if (isPending) {
     return <div>Loading...</div>;
   }
- // console.log(student?.profile_image);
+  // console.log(student?.profile_image);
   const formatExamDate = (dateString) => {
     const options = { year: "numeric", month: "long" };
     const date = new Date(dateString);
@@ -432,7 +432,7 @@ const Formfillup = () => {
           <img
             className="border-2 border-gray-300"
             name="profile_image"
-            src={student?.profile_image||"/user.png"}
+            src={student?.profile_image || "/user.png"}
             alt="ছবি"
             width="170px"
             height="170px"
@@ -640,15 +640,15 @@ const Formfillup = () => {
           degree.toLowerCase() == "l.l.b(hons)" ||
           degree.toLowerCase() == "b.sc(hons)" ||
           degree.toLowerCase() == "b.s.s(hons)") && (
-            <ResultSectionHons
-              studentResult={studentResult}
-              department={student?.department_name}
-              exam_centre={student?.results[0]?.exam_centre}
-              student_id={Number(student?.student_id)}
-              academic_session={student?.academic_session}
-              degree={degree}
-            ></ResultSectionHons>
-          )}
+          <ResultSectionHons
+            studentResult={studentResult}
+            department={student?.department_name}
+            exam_centre={student?.results[0]?.exam_centre}
+            student_id={Number(student?.student_id)}
+            academic_session={student?.academic_session}
+            degree={degree}
+          ></ResultSectionHons>
+        )}
         {degree.toLowerCase() == "b.pharm" && (
           <ResultBPharm
             studentResult={studentResult}
@@ -667,15 +667,15 @@ const Formfillup = () => {
           degree.toLowerCase() == "m.s.s" ||
           degree.toLowerCase() == "m.sc.engg" ||
           degree.toLowerCase() == "m.pharm") && (
-            <ResultSectionMasters
-              studentResult={studentResult}
-              department={student?.department_name}
-              exam_centre={student?.results[0]?.exam_centre}
-              student_id={Number(student?.student_id)}
-              academic_session={student?.academic_session}
-              degree={degree}
-            ></ResultSectionMasters>
-          )}
+          <ResultSectionMasters
+            studentResult={studentResult}
+            department={student?.department_name}
+            exam_centre={student?.results[0]?.exam_centre}
+            student_id={Number(student?.student_id)}
+            academic_session={student?.academic_session}
+            degree={degree}
+          ></ResultSectionMasters>
+        )}
         {/* attachments */}
         <div className="w-full px-5 items-stretch">
           <label>
@@ -683,7 +683,11 @@ const Formfillup = () => {
               মার্কশীট ও অন্যান্য এটাচমেন্ট জমা দিন
             </span>
             <br />
-            <span className="text-red-700">[বি.দ্র: আবেদনকারী কে তার সংশ্লিষ্ট ডিগ্রির সকল পরীক্ষার ট্রান্সক্রিপ্ট, রেজিস্ট্রেশন কার্ড, দরখাস্ত (প্রভোস্টের সাইন সহ) পিডিএফ  আকারে সাবমিট করতে হবে]</span>
+            <span className="text-red-700">
+              [বি.দ্র: আবেদনকারী কে তার সংশ্লিষ্ট ডিগ্রির সকল পরীক্ষার
+              ট্রান্সক্রিপ্ট, রেজিস্ট্রেশন কার্ড, দরখাস্ত (প্রভোস্টের সাইন সহ)
+              পিডিএফ আকারে সাবমিট করতে হবে]
+            </span>
           </label>
           <input
             type="file"
@@ -699,34 +703,39 @@ const Formfillup = () => {
             Be careful. You can upload upto 8MB.
           </p>
         </div>
-        <Button
-          type="submit"
-          className="mt-5"
-          disabled={
-            !(
-              ((degree.toLowerCase() == "b.sc.engg" ||
-                degree.toLowerCase() == "b.b.a") &&
-                student?.results[7]?.cgpa) ||
-              ((degree.toLowerCase() == "b.a(hons)" ||
-                degree.toLowerCase() == "b.sc(hons)" ||
-                degree.toLowerCase() == "l.l.b(hons)" ||
-                degree.toLowerCase() == "b.s.s(hons)") &&
-                student?.results[3]?.cgpa) ||
-              ((degree.toLowerCase() == "m.a" ||
-                degree.toLowerCase() == "m.sc" ||
-                degree.toLowerCase() == "l.l.m" ||
-                degree.toLowerCase() == "m.s.s" ||
-                degree.toLowerCase() == "m.pharm") &&
-                student?.results[0]?.cgpa) ||
-              (degree.toLowerCase() == "m.b.a" && student?.results[1]?.cgpa) ||
-              (degree.toLowerCase() == "m.sc.engg" &&
-                student?.results[2]?.cgpa) ||
-              (degree.toLowerCase() == "b.pharm" && student?.results[4]?.cgpa)
-            )
-          }
-        >
-          Submit{" "}
-        </Button>
+        {isPending ? (
+          "Loading...."
+        ) : (
+          <Button
+            type="submit"
+            className="mt-5"
+            disabled={
+              !(
+                ((degree.toLowerCase() == "b.sc.engg" ||
+                  degree.toLowerCase() == "b.b.a") &&
+                  student?.results[7]?.cgpa) ||
+                ((degree.toLowerCase() == "b.a(hons)" ||
+                  degree.toLowerCase() == "b.sc(hons)" ||
+                  degree.toLowerCase() == "l.l.b(hons)" ||
+                  degree.toLowerCase() == "b.s.s(hons)") &&
+                  student?.results[3]?.cgpa) ||
+                ((degree.toLowerCase() == "m.a" ||
+                  degree.toLowerCase() == "m.sc" ||
+                  degree.toLowerCase() == "l.l.m" ||
+                  degree.toLowerCase() == "m.s.s" ||
+                  degree.toLowerCase() == "m.pharm") &&
+                  student?.results[0]?.cgpa) ||
+                (degree.toLowerCase() == "m.b.a" &&
+                  student?.results[1]?.cgpa) ||
+                (degree.toLowerCase() == "m.sc.engg" &&
+                  student?.results[2]?.cgpa) ||
+                (degree.toLowerCase() == "b.pharm" && student?.results[4]?.cgpa)
+              )
+            }
+          >
+            Submit{" "}
+          </Button>
+        )}
       </form>
     </div>
   );
